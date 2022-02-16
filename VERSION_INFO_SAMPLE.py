@@ -1,0 +1,3 @@
+def VERSION():
+    VERSION = 'YOUR_VERSION_HERE'
+    return VERSION
