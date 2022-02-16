@@ -2,8 +2,8 @@ import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import argparse
-import json
 import time
+import ast
 
 import VERSION_INFO
 import API_KEY
@@ -26,7 +26,7 @@ sp_volume = args.vlm
 
 sp_scope = "user-read-playback-state,user-modify-playback-state"
 
-sp_api = spotipy.Spotify(auth_manager=SpotifyOAuth(scope = sp_scope))
+sp_api = spotipy.Spotify(auth_manager = SpotifyOAuth(scope = sp_scope, cache_path = 'C:\\Users\\' + os.environ['USERNAME'] + '\\Documents\\.cache'))
 
 player_info = sp_api.current_playback()
 track_info = sp_api.current_user_playing_track()
