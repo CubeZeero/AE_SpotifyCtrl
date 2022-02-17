@@ -29,27 +29,11 @@ sp_scope = "user-read-playback-state,user-modify-playback-state"
 sp_api = spotipy.Spotify(auth_manager = SpotifyOAuth(scope = sp_scope, cache_path = 'C:\\Users\\' + os.environ['USERNAME'] + '\\Documents\\.cache'))
 
 player_info = sp_api.current_playback()
-track_info = sp_api.current_user_playing_track()
-
-artist_name = ''
 
 current_play_state = player_info['is_playing']
 current_volume = int(player_info['device']['volume_percent'])
 current_repeat_state = player_info['repeat_state']
 current_shuffle_state = player_info['shuffle_state']
-
-track_name = track_info['item']['name']
-album_name = track_info['item']['album']['name']
-
-for cnt in range(len(track_info['item']['artists'])):
-    if cnt == len(track_info['item']['artists']) - 1:
-        artist_name += track_info['item']['artists'][cnt]['name']
-    else:
-        artist_name += track_info['item']['artists'][cnt]['name'] + ' / '
-
-track_info_data = ('Track: ' + track_name + '\n'
-                   'Album: ' + album_name + '\n'
-                   'Artist: ' + artist_name)
 
 if sp_command == 'play' and current_play_state == False:
     sp_api.start_playback()
@@ -88,4 +72,22 @@ if sp_command == 'mute':
     sp_api.volume(0)
 
 if sp_command == 'track_info':
+
+    track_info = sp_api.current_user_playing_track()
+
+    track_name = track_info['item']['name']
+    album_name = track_info['item']['album']['name']
+
+    artist_name = ''
+
+    for cnt in range(len(track_info['item']['artists'])):
+        if cnt == len(track_info['item']['artists']) - 1:
+            artist_name += track_info['item']['artists'][cnt]['name']
+        else:
+            artist_name += track_info['item']['artists'][cnt]['name'] + ' / '
+
+    track_info_data = ('Track: ' + track_name + '\n'
+                       'Album: ' + album_name + '\n'
+                       'Artist: ' + artist_name)
+
     print(track_info_data)
