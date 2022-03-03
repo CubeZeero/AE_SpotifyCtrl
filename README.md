@@ -5,6 +5,6 @@ This is achieved by calling a command line tool created in Python from After Eff
 
 <br>
 
-This project has been reworked by CEP and passed on to this project.
+This project has been reworked by CEP and passed on to other project.
 
 https://github.com/CubeZeero/SpotifyCtrl
